@@ -2,6 +2,7 @@ package jp.ikikko.bti.backlogapi;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import jp.ikikko.bti.backlogapi.util.ConvertUtil;
 
@@ -41,27 +42,28 @@ public class BacklogApiClient {
 		Object[] params = new Object[] { key };
 
 		Object result = client.execute(Method.GET_PROJECT.getName(), params);
-		Project project = ConvertUtil.toProject(result);
+		Project project = ConvertUtil.responseToProject(result);
 
 		return project;
 	}
 
 	/**
-	 * 課題を追加します。
+	 * 課題を追加します。追加に成功した場合は、追加された課題が返ります。
 	 * 
 	 * @throws XmlRpcException
 	 * 
 	 * @see http://www.backlog.jp/api/method4_1.html
 	 * 
 	 */
-	public boolean createIssue(int projectId, Issue issue)
+	public Issue createIssue(int projectId, Issue newIssue)
 			throws XmlRpcException {
-		Object[] params = new Object[] { projectId, issue };
+		Map<String, Object> request = ConvertUtil.issueToRequest(newIssue);
+		request.put("projectId", projectId);
+		Object[] params = new Object[] { request };
 
-		// TODO 実装
-		// client.execute(Method.CREATE_ISSUE.getName(), params);
+		Object result = client.execute(Method.CREATE_ISSUE.getName(), params);
+		Issue issue = ConvertUtil.responseToIssue(result);
 
-		return false;
+		return issue;
 	}
-
 }

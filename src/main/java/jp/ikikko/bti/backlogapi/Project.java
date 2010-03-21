@@ -2,15 +2,19 @@ package jp.ikikko.bti.backlogapi;
 
 public class Project {
 
+	/** プロジェクトID */
 	private int id;
 
+	/** プロジェクト名 */
 	private String name;
 
+	/** プロジェクトキー */
 	private String key;
 
+	/** プロジェクトホームURL */
 	private String url;
 
-	public Project() {
+	Project() {
 	}
 
 	public Project(int id, String name, String key, String url) {

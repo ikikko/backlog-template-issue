@@ -1,6 +1,6 @@
 package jp.ikikko.bti;
 
-public class BacklogTemplateIssueMain {
+public class BacklogTemplateIssue {
 
 	public static void main(String[] args) {
 
