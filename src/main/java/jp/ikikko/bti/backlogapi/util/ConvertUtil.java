@@ -117,19 +117,8 @@ public class ConvertUtil {
 			status = (String) statusObj.get("name");
 		}
 
-		int assignerUser = 0;
-		Map<String, Object> assignerUserObj = (Map<String, Object>) map
-				.get("assigner");
-		if (assignerUserObj != null) {
-			assignerUser = (Integer) assignerUserObj.get("id");
-		}
-
-		int createdUser = 0;
-		Map<String, Object> createdUserObj = (Map<String, Object>) map
-				.get("created_user");
-		if (createdUserObj != null) {
-			createdUser = (Integer) createdUserObj.get("id");
-		}
+		User assignerUser = responseToUser(map.get("assigner"));
+		User createdUser = responseToUser(map.get("created_user"));
 
 		Date createdOn = responseToDatetime(map.get("created_on"));
 		Date updatedOn = responseToDatetime(map.get("updated_on"));
@@ -254,7 +243,7 @@ public class ConvertUtil {
 		}
 
 		request.put("priority", issue.getPriority());
-		request.put("assignerId", issue.getAssignerUser());
+		request.put("assignerId", issue.getAssignerUser().getId());
 
 		return request;
 	}

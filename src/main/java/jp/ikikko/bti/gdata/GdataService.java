@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import jp.ikikko.bti.entity.Issue;
+import jp.ikikko.bti.entity.User;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -131,8 +132,9 @@ public class GdataService {
 			issue.setPriority(Integer.valueOf(elements.getValue("優先度ID")));
 		}
 		if (elements.getValue("担当者ユーザID") != null) {
-			issue.setAssignerUser(Integer
-					.valueOf(elements.getValue("担当者ユーザID")));
+			Integer assignerUserId = Integer.valueOf(elements
+					.getValue("担当者ユーザID"));
+			issue.setAssignerUser(new User(null, assignerUserId, null));
 		}
 
 		return issue;

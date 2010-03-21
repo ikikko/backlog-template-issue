@@ -11,9 +11,9 @@ public class Issue {
 	public Issue(String key, String summary, String description, String url,
 			Date startDate, Date dueDate, Double estimatedHours,
 			Double actualHours, String issueType, String[] components,
-			String[] affectsVersions, String[] milestoneVersions,
-			int priority, String resolution, String status,
-			int assignerUser, int createdUser, Date createdOn, Date updatedOn) {
+			String[] affectsVersions, String[] milestoneVersions, int priority,
+			String resolution, String status, User assignerUser,
+			User createdUser, Date createdOn, Date updatedOn) {
 		this.key = key;
 		this.summary = summary;
 		this.description = description;
@@ -81,11 +81,10 @@ public class Issue {
 	private String status;
 
 	/** 担当者 */
-	private int assignerUser;
-	// TODO User系は、Stringを受け取ってgetUsers()でintにしてやる方が親切
+	private User assignerUser;
 
 	/** 登録者 */
-	private int createdUser;
+	private User createdUser;
 
 	/** 登録日時 */
 	private Date createdOn;
@@ -213,19 +212,19 @@ public class Issue {
 		this.status = status;
 	}
 
-	public int getAssignerUser() {
+	public User getAssignerUser() {
 		return assignerUser;
 	}
 
-	public void setAssignerUser(int assignerUser) {
+	public void setAssignerUser(User assignerUser) {
 		this.assignerUser = assignerUser;
 	}
 
-	public int getCreatedUser() {
+	public User getCreatedUser() {
 		return createdUser;
 	}
 
-	public void setCreatedUser(int createdUser) {
+	public void setCreatedUser(User createdUser) {
 		this.createdUser = createdUser;
 	}
 
