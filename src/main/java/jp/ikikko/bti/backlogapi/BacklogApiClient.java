@@ -7,6 +7,7 @@ import java.util.Map;
 import jp.ikikko.bti.backlogapi.util.ConvertUtil;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
+import jp.ikikko.bti.entity.User;
 
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
@@ -16,8 +17,11 @@ public class BacklogApiClient {
 
 	private XmlRpcClient client;
 
-	public BacklogApiClient(String space, String userName, String password) {
-		// TODO GdataService と合わせて、login() を用意する
+	public BacklogApiClient() {
+		client = new XmlRpcClient();
+	}
+
+	public void login(String space, String userName, String password) {
 		String url = "https://" + space + ".backlog.jp/XML-RPC";
 
 		try {
@@ -26,11 +30,31 @@ public class BacklogApiClient {
 			config.setBasicUserName(userName);
 			config.setBasicPassword(password);
 
-			client = new XmlRpcClient();
 			client.setConfig(config);
+
+			getUser(userName);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
+		} catch (XmlRpcException e) {
+			throw new IllegalArgumentException("Login Failed.");
 		}
+	}
+
+	/**
+	 * 指定された ログインID のユーザーを取得します。
+	 * 
+	 * @throws XmlRpcException
+	 * 
+	 * @see http://www.backlog.jp/api/method###.html
+	 * 
+	 */
+	public User getUser(String userId) throws XmlRpcException {
+		Object[] params = new Object[] { userId };
+
+		Object result = client.execute(Method.GET_USER.getName(), params);
+		User user = ConvertUtil.responseToUser(result);
+
+		return user;
 	}
 
 	/**

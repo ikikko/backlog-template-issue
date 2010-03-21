@@ -140,9 +140,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="http://spreadsheets.google.com/ccc?key=0Ajq41fTDA49TdDVIUlRTeldUV2dVNFdBbTNONmtYZ3c&amp;hl=ja"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="googleUrlActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

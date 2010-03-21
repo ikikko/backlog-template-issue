@@ -75,11 +75,6 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
         jLabel6.setText("URL");
 
         googleUrl.setText("http://spreadsheets.google.com/ccc?key=0Ajq41fTDA49TdDVIUlRTeldUV2dVNFdBbTNONmtYZ3c&hl=ja");
-        googleUrl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                googleUrlActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("MS UI Gothic", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -289,8 +284,9 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
             service.login(googleId.getText(), new String(googlePassword.getPassword()));
             Collection<Issue> issues = service.getTemplateIssues(new URL(googleUrl.getText()));
 
-            BacklogApiClient client =
-                    new BacklogApiClient(backlogSpace.getText(), backlogId.getText(), new String(backlogPassword.getPassword()));
+            BacklogApiClient client = new BacklogApiClient();
+            client.login(backlogSpace.getText(), backlogId.getText(), new String(backlogPassword.getPassword()));
+
             Project project = client.getProject(backlogProject.getText());
             for (Issue newIssue : issues) {
                 Issue issue = client.createIssue(project.getId(), newIssue);
@@ -310,10 +306,6 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
         backlogPassword.setText("");
         logArea.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void googleUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_googleUrlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_googleUrlActionPerformed
 
     /**
      * @param args the command line arguments

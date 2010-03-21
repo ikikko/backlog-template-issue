@@ -38,12 +38,8 @@ public class GdataServiceTest {
 	}
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		service = new GdataService();
-	}
-
-	@Test
-	public void login() throws Exception {
 		service.login(USERNAME, PASSWORD);
 	}
 

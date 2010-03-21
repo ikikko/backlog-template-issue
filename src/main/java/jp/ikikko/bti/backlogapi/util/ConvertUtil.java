@@ -7,6 +7,7 @@ import java.util.Map;
 
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
+import jp.ikikko.bti.entity.User;
 
 /**
  * @author ikikko
@@ -172,18 +173,40 @@ public class ConvertUtil {
 		if (!(value instanceof String)) {
 			throw new IllegalArgumentException("illegal date type " + value);
 		}
-		final String dateString = (String) value;
+		String dateString = (String) value;
 		if (dateString.length() != 14) {
 			throw new IllegalArgumentException("illegal date format " + value);
 		}
 
 		try {
-			final Date date = DateUtil.parseYyyyMMddHHmmssSSS(StringUtil.fill(
+			Date date = DateUtil.parseYyyyMMddHHmmssSSS(StringUtil.fill(
 					dateString, 16, '0'));
 			return date;
 		} catch (IllegalArgumentException e) {
 			return null;
 		}
+	}
+
+	/**
+	 * XML-RPC のレスポンスを {@link User} に変換します。
+	 */
+	@SuppressWarnings("unchecked")
+	public static User responseToUser(Object value) {
+		if (value == null) {
+			return null;
+		}
+
+		Map<String, Object> map = (Map<String, Object>) value;
+		if (map.isEmpty()) {
+			return null;
+		}
+
+		String name = (String) map.get("name");
+		int id = ((Integer) map.get("id")).intValue();
+		Date updatedOn = responseToDatetime(map.get("updated_on"));
+		User user = new User(name, id, updatedOn);
+
+		return user;
 	}
 
 	/**

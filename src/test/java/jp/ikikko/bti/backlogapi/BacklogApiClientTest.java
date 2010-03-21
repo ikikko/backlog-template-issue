@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
+import jp.ikikko.bti.entity.User;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -48,7 +49,13 @@ public class BacklogApiClientTest {
 
 	@Before
 	public void setUp() throws Exception {
-		client = new BacklogApiClient(SPACE, USERNAME, PASSWORD);
+		client = new BacklogApiClient();
+		client.login(SPACE, USERNAME, PASSWORD);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void login失敗() throws Exception {
+		client.login("fail", "fail", "fail");
 	}
 
 	@Test
@@ -56,6 +63,13 @@ public class BacklogApiClientTest {
 		Project project = client.getProject(PROJECT_KEY);
 
 		assertThat(project, is(notNullValue()));
+	}
+
+	@Test
+	public void getUser() throws Exception {
+		User user = client.getUser(USERNAME);
+
+		assertThat(user, is(notNullValue()));
 	}
 
 	@Ignore("更新系APIは、普段のユニットテストでは実行しない")

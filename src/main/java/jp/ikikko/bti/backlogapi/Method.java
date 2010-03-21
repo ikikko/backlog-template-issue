@@ -2,7 +2,8 @@ package jp.ikikko.bti.backlogapi;
 
 public enum Method {
 
-	GET_PROJECT("backlog.getProject"), CREATE_ISSUE("backlog.createIssue");
+	GET_USER("backlog.getUser"), GET_PROJECT("backlog.getProject"), CREATE_ISSUE(
+			"backlog.createIssue");
 
 	private String name;
 
