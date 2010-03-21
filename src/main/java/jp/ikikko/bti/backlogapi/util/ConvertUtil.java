@@ -3,7 +3,6 @@ package jp.ikikko.bti.backlogapi.util;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import jp.ikikko.bti.entity.Issue;
@@ -72,32 +71,29 @@ public class ConvertUtil {
 		}
 
 		String[] components = null;
-		List<Object> componentObjs = (List<Object>) map.get("components");
+		Object[] componentObjs = (Object[]) map.get("components");
 		if (componentObjs != null) {
-			components = new String[componentObjs.size()];
-			for (int i = 0; i < componentObjs.size(); i++) {
-				Map<String, Object> componentObj = (Map<String, Object>) componentObjs
-						.get(i);
+			components = new String[componentObjs.length];
+			for (int i = 0; i < componentObjs.length; i++) {
+				Map<String, Object> componentObj = (Map<String, Object>) componentObjs[i];
 				components[i] = (String) componentObj.get("name");
 			}
 		}
 		String[] affectsVersions = null;
-		List<Object> affectsVersionObjs = (List<Object>) map.get("versions");
+		Object[] affectsVersionObjs = (Object[]) map.get("versions");
 		if (affectsVersionObjs != null) {
-			affectsVersions = new String[affectsVersionObjs.size()];
-			for (int i = 0; i < affectsVersionObjs.size(); i++) {
-				Map<String, Object> affectsVersionObj = (Map<String, Object>) affectsVersionObjs
-						.get(i);
+			affectsVersions = new String[affectsVersionObjs.length];
+			for (int i = 0; i < affectsVersionObjs.length; i++) {
+				Map<String, Object> affectsVersionObj = (Map<String, Object>) affectsVersionObjs[i];
 				affectsVersions[i] = (String) affectsVersionObj.get("name");
 			}
 		}
 		String[] milestoneVersions = null;
-		List<Object> milestoneObjs = (List<Object>) map.get("milestones");
+		Object[] milestoneObjs = (Object[]) map.get("milestones");
 		if (milestoneObjs != null) {
-			milestoneVersions = new String[milestoneObjs.size()];
-			for (int i = 0; i < milestoneObjs.size(); i++) {
-				Map<String, Object> milestoneObj = (Map<String, Object>) milestoneObjs
-						.get(i);
+			milestoneVersions = new String[milestoneObjs.length];
+			for (int i = 0; i < milestoneObjs.length; i++) {
+				Map<String, Object> milestoneObj = (Map<String, Object>) milestoneObjs[i];
 				milestoneVersions[i] = (String) milestoneObj.get("name");
 			}
 		}

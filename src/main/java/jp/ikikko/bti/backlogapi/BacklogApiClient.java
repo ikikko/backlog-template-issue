@@ -17,6 +17,7 @@ public class BacklogApiClient {
 	private XmlRpcClient client;
 
 	public BacklogApiClient(String space, String userName, String password) {
+		// TODO GdataService と合わせて、login() を用意する
 		String url = "https://" + space + ".backlog.jp/XML-RPC";
 
 		try {
