@@ -1,10 +1,10 @@
-package jp.ikikko.bti.backlogapi;
+package jp.ikikko.bti.entity;
 
 import java.util.Date;
 
 public class Issue {
 
-	Issue() {
+	public Issue() {
 	}
 
 	public Issue(String key, String summary, String description, String url,
@@ -96,7 +96,7 @@ public class Issue {
 		return key;
 	}
 
-	void setKey(String key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 
@@ -104,7 +104,7 @@ public class Issue {
 		return summary;
 	}
 
-	void setSummary(String summary) {
+	public void setSummary(String summary) {
 		this.summary = summary;
 	}
 
@@ -112,7 +112,7 @@ public class Issue {
 		return description;
 	}
 
-	void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -120,7 +120,7 @@ public class Issue {
 		return startDate;
 	}
 
-	void setUrl(String url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
@@ -128,7 +128,7 @@ public class Issue {
 		return url;
 	}
 
-	void setStartDate(Date startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -136,7 +136,7 @@ public class Issue {
 		return dueDate;
 	}
 
-	void setDueDate(Date dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -144,7 +144,7 @@ public class Issue {
 		return estimatedHours;
 	}
 
-	void setEstimatedHours(Double estimatedHours) {
+	public void setEstimatedHours(Double estimatedHours) {
 		this.estimatedHours = estimatedHours;
 	}
 
@@ -152,7 +152,7 @@ public class Issue {
 		return actualHours;
 	}
 
-	void setActualHours(Double actualHours) {
+	public void setActualHours(Double actualHours) {
 		this.actualHours = actualHours;
 	}
 
@@ -160,7 +160,7 @@ public class Issue {
 		return issueType;
 	}
 
-	void setIssueType(String issueType) {
+	public void setIssueType(String issueType) {
 		this.issueType = issueType;
 	}
 
@@ -168,7 +168,7 @@ public class Issue {
 		return components;
 	}
 
-	void setComponents(String[] components) {
+	public void setComponents(String[] components) {
 		this.components = components;
 	}
 
@@ -176,7 +176,7 @@ public class Issue {
 		return affectsVersions;
 	}
 
-	void setAffectsVersions(String[] affectsVersions) {
+	public void setAffectsVersions(String[] affectsVersions) {
 		this.affectsVersions = affectsVersions;
 	}
 
@@ -184,7 +184,7 @@ public class Issue {
 		return milestoneVersions;
 	}
 
-	void setMilestoneVersions(String[] milestoneVersions) {
+	public void setMilestoneVersions(String[] milestoneVersions) {
 		this.milestoneVersions = milestoneVersions;
 	}
 
@@ -192,7 +192,7 @@ public class Issue {
 		return priority;
 	}
 
-	void setPriority(String priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
@@ -200,7 +200,7 @@ public class Issue {
 		return resolution;
 	}
 
-	void setResolution(String resolution) {
+	public void setResolution(String resolution) {
 		this.resolution = resolution;
 	}
 
@@ -208,7 +208,7 @@ public class Issue {
 		return status;
 	}
 
-	void setStatus(String status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -216,7 +216,7 @@ public class Issue {
 		return assignerUser;
 	}
 
-	void setAssignerUser(int assignerUser) {
+	public void setAssignerUser(int assignerUser) {
 		this.assignerUser = assignerUser;
 	}
 
@@ -224,7 +224,7 @@ public class Issue {
 		return createdUser;
 	}
 
-	void setCreatedUser(int createdUser) {
+	public void setCreatedUser(int createdUser) {
 		this.createdUser = createdUser;
 	}
 
@@ -232,7 +232,7 @@ public class Issue {
 		return createdOn;
 	}
 
-	void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -240,7 +240,7 @@ public class Issue {
 		return updatedOn;
 	}
 
-	void setUpdatedOn(Date updatedOn) {
+	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
 	}
 

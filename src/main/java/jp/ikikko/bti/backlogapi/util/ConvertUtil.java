@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jp.ikikko.bti.backlogapi.Issue;
-import jp.ikikko.bti.backlogapi.Project;
+import jp.ikikko.bti.entity.Issue;
+import jp.ikikko.bti.entity.Project;
 
 /**
  * @author ikikko

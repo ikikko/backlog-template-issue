@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 import java.util.Properties;
 
+import jp.ikikko.bti.entity.Issue;
+import jp.ikikko.bti.entity.Project;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;

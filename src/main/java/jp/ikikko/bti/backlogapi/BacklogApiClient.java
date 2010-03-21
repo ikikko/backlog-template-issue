@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Map;
 
 import jp.ikikko.bti.backlogapi.util.ConvertUtil;
+import jp.ikikko.bti.entity.Issue;
+import jp.ikikko.bti.entity.Project;
 
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
