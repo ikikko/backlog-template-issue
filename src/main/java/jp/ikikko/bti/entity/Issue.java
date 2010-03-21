@@ -1,5 +1,6 @@
 package jp.ikikko.bti.entity;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Issue {
@@ -11,7 +12,7 @@ public class Issue {
 			Date startDate, Date dueDate, Double estimatedHours,
 			Double actualHours, String issueType, String[] components,
 			String[] affectsVersions, String[] milestoneVersions,
-			String priority, String resolution, String status,
+			int priority, String resolution, String status,
 			int assignerUser, int createdUser, Date createdOn, Date updatedOn) {
 		this.key = key;
 		this.summary = summary;
@@ -71,7 +72,7 @@ public class Issue {
 	private String[] milestoneVersions;
 
 	/** 優先度 */
-	private String priority;
+	private int priority;
 
 	/** 完了理由 */
 	private String resolution;
@@ -188,11 +189,11 @@ public class Issue {
 		this.milestoneVersions = milestoneVersions;
 	}
 
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
@@ -242,6 +243,21 @@ public class Issue {
 
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	@Override
+	public String toString() {
+		return "Issue [actualHours=" + actualHours + ", affectsVersions="
+				+ Arrays.toString(affectsVersions) + ", assignerUser="
+				+ assignerUser + ", components=" + Arrays.toString(components)
+				+ ", createdOn=" + createdOn + ", createdUser=" + createdUser
+				+ ", description=" + description + ", dueDate=" + dueDate
+				+ ", estimatedHours=" + estimatedHours + ", issueType="
+				+ issueType + ", key=" + key + ", milestoneVersions="
+				+ Arrays.toString(milestoneVersions) + ", priority=" + priority
+				+ ", resolution=" + resolution + ", startDate=" + startDate
+				+ ", status=" + status + ", summary=" + summary
+				+ ", updatedOn=" + updatedOn + ", url=" + url + "]";
 	}
 
 }

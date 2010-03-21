@@ -102,11 +102,11 @@ public class ConvertUtil {
 			}
 		}
 
-		String priority = null;
+		int priority = 0;
 		Map<String, Object> priorityObj = (Map<String, Object>) map
 				.get("priority");
 		if (priorityObj != null) {
-			priority = (String) priorityObj.get("name");
+			priority = (Integer) priorityObj.get("id");
 		}
 		String resolution = null;
 		Map<String, Object> resolutionObj = (Map<String, Object>) map
@@ -234,9 +234,7 @@ public class ConvertUtil {
 					.asList(issue.getMilestoneVersions()));
 		}
 
-		if (issue.getPriority() != null) {
-			request.put("priority", issue.getPriority());
-		}
+		request.put("priority", issue.getPriority());
 		request.put("assignerId", issue.getAssignerUser());
 
 		return request;

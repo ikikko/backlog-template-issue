@@ -56,4 +56,10 @@ public class Project {
 		this.url = url;
 	}
 
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", key=" + key + ", name=" + name
+				+ ", url=" + url + "]";
+	}
+
 }
