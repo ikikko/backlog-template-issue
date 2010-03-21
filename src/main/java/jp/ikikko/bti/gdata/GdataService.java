@@ -67,49 +67,7 @@ public class GdataService {
 
 		List<Issue> issues = new ArrayList<Issue>();
 		for (ListEntry list : listFeed.getEntries()) {
-			Issue issue = new Issue();
-			CustomElementCollection elements = list.getCustomElements();
-
-			issue.setSummary(elements.getValue("件名"));
-			issue.setDescription(elements.getValue("詳細"));
-
-			if (elements.getValue("開始日") != null) {
-				try {
-					issue.setStartDate(format.parse(elements.getValue("開始日")));
-				} catch (ParseException e) {
-				}
-			}
-			if (elements.getValue("期限日") != null) {
-				try {
-					issue.setDueDate(format.parse(elements.getValue("期限日")));
-				} catch (ParseException e) {
-				}
-			}
-
-			if (elements.getValue("予定時間") != null) {
-				issue.setEstimatedHours(Double.valueOf(elements
-						.getValue("予定時間")));
-			}
-			if (elements.getValue("実績時間") != null) {
-				issue.setActualHours(Double.valueOf(elements.getValue("実績時間")));
-			}
-
-			issue.setIssueType(elements.getValue("種別名"));
-			issue.setComponents(new String[] { elements.getValue("カテゴリ名") });
-			issue.setAffectsVersions(new String[] { elements
-					.getValue("発生バージョン名") });
-			issue.setMilestoneVersions(new String[] { elements
-					.getValue("マイルストーン名") });
-
-			if (elements.getValue("優先度ID") != null) {
-				issue.setPriority(Integer.valueOf(elements.getValue("優先度ID")));
-			}
-			if (elements.getValue("担当者ユーザID") != null) {
-				issue.setAssignerUser(Integer.valueOf(elements
-						.getValue("担当者ユーザID")));
-			}
-
-			issues.add(issue);
+			issues.add(createIssueFromSingleList(list));
 		}
 
 		return issues;
@@ -128,5 +86,55 @@ public class GdataService {
 		}
 
 		return map.get("key");
+	}
+
+	/**
+	 * スプレッドシートの1行から、{@link Issue} を作成します。
+	 */
+	Issue createIssueFromSingleList(ListEntry list) {
+		Issue issue = new Issue();
+		CustomElementCollection elements = list.getCustomElements();
+
+		issue.setSummary(elements.getValue("件名"));
+		issue.setDescription(elements.getValue("詳細"));
+
+		if (elements.getValue("開始日") != null) {
+			try {
+				issue.setStartDate(format.parse(elements.getValue("開始日")));
+			} catch (ParseException e) {
+			}
+		}
+		if (elements.getValue("期限日") != null) {
+			try {
+				issue.setDueDate(format.parse(elements.getValue("期限日")));
+			} catch (ParseException e) {
+			}
+		}
+
+		if (elements.getValue("予定時間") != null) {
+			issue.setEstimatedHours(Double.valueOf(elements.getValue("予定時間")));
+		}
+		if (elements.getValue("実績時間") != null) {
+			issue.setActualHours(Double.valueOf(elements.getValue("実績時間")));
+		}
+
+		issue.setIssueType(elements.getValue("種別名"));
+		issue.setComponents(new String[] { elements.getValue("カテゴリ名") });
+		issue
+				.setAffectsVersions(new String[] { elements
+						.getValue("発生バージョン名") });
+		issue
+				.setMilestoneVersions(new String[] { elements
+						.getValue("マイルストーン名") });
+
+		if (elements.getValue("優先度ID") != null) {
+			issue.setPriority(Integer.valueOf(elements.getValue("優先度ID")));
+		}
+		if (elements.getValue("担当者ユーザID") != null) {
+			issue.setAssignerUser(Integer
+					.valueOf(elements.getValue("担当者ユーザID")));
+		}
+
+		return issue;
 	}
 }
