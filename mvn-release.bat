@@ -1,0 +1,1 @@
+mvn release:prepare release:perform -Drelease.username=%1 -Drelease.password=%2
