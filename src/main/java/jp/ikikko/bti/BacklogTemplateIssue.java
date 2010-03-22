@@ -16,10 +16,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
 import javax.swing.event.HyperlinkEvent;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.html.HTMLDocument;
 import jp.ikikko.bti.backlogapi.BacklogApiClient;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
 import jp.ikikko.bti.gdata.GdataService;
+import jp.ikikko.bti.util.HTMLDocumentUtil;
 
 /**
  *
@@ -288,6 +292,9 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        HTMLDocument document = (HTMLDocument) logPane.getDocument();
+        Element body = HTMLDocumentUtil.getBodyElement(document);
+
         try {
             GdataService service = new GdataService();
             service.login(googleId.getText(), new String(googlePassword.getPassword()));
@@ -299,10 +306,20 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
             Project project = client.getProject(backlogProject.getText());
             for (Issue newIssue : issues) {
                 Issue issue = client.createIssue(project.getId(), newIssue);
-                logPane.setText("[CREATE] : " + "<a href='" + issue.getUrl() + "'>" + issue.getSummary() + "</a>" + "\n");
+                document.insertBeforeStart(body, "ISSUE : " + "<a href='" + issue.getUrl() + "'>" + "[" + issue.getKey() + "] " + issue.getSummary() + "</a><br>");
             }
+        } catch (BadLocationException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (Exception e) {
-            // logArea.append(e + "\n");
+            try {
+                document.insertBeforeStart(body, e + "<br>");
+            } catch (BadLocationException e1) {
+                throw new RuntimeException(e1);
+            } catch (IOException e1) {
+                throw new RuntimeException(e1);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -313,7 +330,7 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
         backlogSpace.setText("");
         backlogId.setText("");
         backlogPassword.setText("");
-        // logArea.setText("");
+        // logArea.setText(""); // TODO clear
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void logPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_logPaneHyperlinkUpdate
@@ -321,7 +338,9 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
             try {
                 Desktop.getDesktop().browse(evt.getURL().toURI());
             } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
             } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }//GEN-LAST:event_logPaneHyperlinkUpdate
