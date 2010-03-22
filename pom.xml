@@ -14,6 +14,30 @@
                 <encoding>UTF-8</encoding>
             </configuration>
         </plugin>
+        <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-assembly-plugin</artifactId>
+        	<executions>
+        		<execution>
+        			<id>make-assembly</id>
+        			<phase>package</phase>
+        			<goals>
+        				<goal>single</goal>
+        			</goals>
+        		</execution>
+        	</executions>
+        	<configuration>
+        	   <descriptorRefs>
+        	       <descriptorRef>jar-with-dependencies</descriptorRef>
+        	   </descriptorRefs>
+        	   <archive>
+        	       <manifest>
+        	           <mainClass>jp.ikikko.bti.BacklogTemplateIssue</mainClass>
+        	       </manifest>
+        	   </archive>
+        	   <appendAssemblyId>false</appendAssemblyId>
+        	</configuration>
+        </plugin>
     </plugins>
   </build>
   <repositories>
