@@ -330,7 +330,6 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
         backlogSpace.setText("");
         backlogId.setText("");
         backlogPassword.setText("");
-        // logArea.setText(""); // TODO clear
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void logPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_logPaneHyperlinkUpdate
