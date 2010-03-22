@@ -10,8 +10,12 @@
  */
 package jp.ikikko.bti;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
+import javax.swing.event.HyperlinkEvent;
 import jp.ikikko.bti.backlogapi.BacklogApiClient;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
@@ -60,8 +64,8 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        logArea = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        logPane = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Backlog Template Issue");
@@ -76,7 +80,7 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
 
         googleUrl.setText("http://spreadsheets.google.com/ccc?key=0Ajq41fTDA49TdDVIUlRTeldUV2dVNFdBbTNONmtYZ3c&hl=ja");
 
-        jLabel7.setFont(new java.awt.Font("MS UI Gothic", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("MS UI Gothic", 1, 14));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jp/ikikko/bti/google_document.gif"))); // NOI18N
 
@@ -231,34 +235,39 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
 
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        logArea.setBackground(java.awt.Color.lightGray);
-        logArea.setColumns(20);
-        logArea.setEditable(false);
-        logArea.setRows(5);
-        jScrollPane1.setViewportView(logArea);
+        logPane.setBackground(java.awt.Color.lightGray);
+        logPane.setContentType("text/html");
+        logPane.setEditable(false);
+        logPane.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        logPane.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                logPaneHyperlinkUpdate(evt);
+            }
+        });
+        jScrollPane2.setViewportView(logPane);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -290,10 +299,10 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
             Project project = client.getProject(backlogProject.getText());
             for (Issue newIssue : issues) {
                 Issue issue = client.createIssue(project.getId(), newIssue);
-                logArea.append("[CREATE] " + issue.getUrl() + "\n");
+                logPane.setText("[CREATE] : " + "<a href='" + issue.getUrl() + "'>" + issue.getSummary() + "</a>" + "\n");
             }
         } catch (Exception e) {
-            logArea.append(e + "\n");
+            // logArea.append(e + "\n");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -304,8 +313,18 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
         backlogSpace.setText("");
         backlogId.setText("");
         backlogPassword.setText("");
-        logArea.setText("");
+        // logArea.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void logPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_logPaneHyperlinkUpdate
+        if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            try {
+                Desktop.getDesktop().browse(evt.getURL().toURI());
+            } catch (URISyntaxException e) {
+            } catch (IOException e) {
+            }
+        }
+    }//GEN-LAST:event_logPaneHyperlinkUpdate
 
     /**
      * @param args the command line arguments
@@ -341,7 +360,7 @@ public class BacklogTemplateIssue extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea logArea;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JEditorPane logPane;
     // End of variables declaration//GEN-END:variables
 }
