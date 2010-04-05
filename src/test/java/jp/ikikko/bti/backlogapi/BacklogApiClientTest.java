@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Properties;
 
 import jp.ikikko.bti.entity.Issue;
@@ -81,6 +82,16 @@ public class BacklogApiClientTest {
 		Issue issue = client.createIssue(PROJECT_ID, newIssue);
 
 		assertThat(issue, is(notNullValue()));
+	}
+
+	@Test
+	public void getUsers() throws Exception {
+		Collection<User> users = client.getUsers(PROJECT_ID);
+
+		assertThat(users, is(notNullValue()));
+		for (User user : users) {
+			assertThat(user, is(notNullValue()));
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package jp.ikikko.bti.backlogapi.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -196,6 +198,23 @@ public class ConvertUtil {
 		User user = new User(name, id, updatedOn);
 
 		return user;
+	}
+
+	/**
+	 * XML-RPC のレスポンスを {@link User} の collection に変換します。
+	 */
+	public static Collection<User> responseToUsers(Object value) {
+		if (value == null) {
+			return null;
+		}
+
+		Object[] objects = (Object[]) value;
+		Collection<User> users = new ArrayList<User>(objects.length);
+		for (int i = 0; i < objects.length; i++) {
+			users.add(responseToUser(objects[i]));
+		}
+
+		return users;
 	}
 
 	/**

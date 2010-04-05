@@ -2,6 +2,7 @@ package jp.ikikko.bti.backlogapi;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Map;
 
 import jp.ikikko.bti.backlogapi.util.ConvertUtil;
@@ -93,4 +94,22 @@ public class BacklogApiClient {
 
 		return issue;
 	}
+
+	/**
+	 * プロジェクトの参加メンバーを返します。
+	 * 
+	 * @throws XmlRpcException
+	 * 
+	 * @see http://www.backlog.jp/api/method2_2.html
+	 * 
+	 */
+	public Collection<User> getUsers(int projectId) throws XmlRpcException {
+		Object[] params = new Object[] { projectId };
+
+		Object result = client.execute(Method.GET_USERS.getName(), params);
+		Collection<User> users = ConvertUtil.responseToUsers(result);
+
+		return users;
+	}
+
 }
