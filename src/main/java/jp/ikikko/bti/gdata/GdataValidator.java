@@ -27,8 +27,13 @@ public class GdataValidator {
 					"set data 'registeredUsers' before you call.");
 		}
 
-		// FIXME equalsとか実装しないとおかしくなりそう
-		return registeredUsers.contains(new User(null, userId, null));
+		for (User user : registeredUsers) {
+			if (user.getId() == userId) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	Collection<User> getRegisteredUsers() {

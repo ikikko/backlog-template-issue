@@ -10,7 +10,6 @@ import jp.ikikko.bti.backlogapi.BacklogApiClient;
 import jp.ikikko.bti.entity.User;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class GdataValidatorTest extends BaseBtiTest {
@@ -41,7 +40,6 @@ public class GdataValidatorTest extends BaseBtiTest {
 	}
 
 	@Test
-	@Ignore("ちゃんと実装されていないので、失敗する")
 	public void isRegisteredUserで成功() throws Exception {
 		validator.setRegisteredData(client, PROJECT_KEY);
 		boolean actual = validator.isRegisteredUser(USER_ID);
