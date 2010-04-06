@@ -1,4 +1,4 @@
-package jp.ikikko.bti.util;
+package jp.ikikko.bti.view.util;
 
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;

@@ -7,7 +7,7 @@ import jp.ikikko.bti.backlogapi.BacklogApiClientTest;
 
 import org.junit.BeforeClass;
 
-public class BaseBtiTest {
+public abstract class BaseBtiTest {
 
 	protected static String SPACE;
 	protected static String USERNAME;

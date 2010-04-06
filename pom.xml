@@ -35,7 +35,7 @@
         	   </descriptorRefs>
         	   <archive>
         	       <manifest>
-        	           <mainClass>jp.ikikko.bti.BacklogTemplateIssue</mainClass>
+        	           <mainClass>jp.ikikko.bti.view.BacklogTemplateIssueFrame</mainClass>
         	       </manifest>
         	   </archive>
         	   <appendAssemblyId>false</appendAssemblyId>
