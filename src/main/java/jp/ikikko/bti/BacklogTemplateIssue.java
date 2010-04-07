@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jp.ikikko.bti.backlogapi.BacklogApiClient;
+import jp.ikikko.bti.backlog.BacklogApiClient;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
 import jp.ikikko.bti.gdata.GdataService;

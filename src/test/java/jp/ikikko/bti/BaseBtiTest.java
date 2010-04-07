@@ -3,7 +3,7 @@ package jp.ikikko.bti;
 import java.io.InputStream;
 import java.util.Properties;
 
-import jp.ikikko.bti.backlogapi.BacklogApiClientTest;
+import jp.ikikko.bti.backlog.BacklogApiClientTest;
 
 import org.junit.BeforeClass;
 

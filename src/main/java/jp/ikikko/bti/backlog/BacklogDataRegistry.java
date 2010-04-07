@@ -1,4 +1,4 @@
-package jp.ikikko.bti.backlogapi;
+package jp.ikikko.bti.backlog;
 
 import java.util.Collection;
 

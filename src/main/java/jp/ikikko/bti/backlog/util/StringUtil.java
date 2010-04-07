@@ -1,4 +1,4 @@
-package jp.ikikko.bti.backlogapi.util;
+package jp.ikikko.bti.backlog.util;
 
 public class StringUtil {
 

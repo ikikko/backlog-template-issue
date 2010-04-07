@@ -1,11 +1,11 @@
-package jp.ikikko.bti.backlogapi;
+package jp.ikikko.bti.backlog;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
 
-import jp.ikikko.bti.backlogapi.util.ConvertUtil;
+import jp.ikikko.bti.backlog.util.ConvertUtil;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
 import jp.ikikko.bti.entity.User;

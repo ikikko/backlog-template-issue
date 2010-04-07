@@ -19,7 +19,8 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
-import jp.ikikko.bti.backlogapi.BacklogApiClient;
+
+import jp.ikikko.bti.backlog.BacklogApiClient;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
 import jp.ikikko.bti.gdata.GdataService;

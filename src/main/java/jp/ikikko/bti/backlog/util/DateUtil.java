@@ -1,4 +1,4 @@
-package jp.ikikko.bti.backlogapi.util;
+package jp.ikikko.bti.backlog.util;
 
 import java.util.Calendar;
 import java.util.Date;
