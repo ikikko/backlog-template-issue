@@ -14,7 +14,7 @@ public abstract class BaseBtiTest {
 	protected static String PASSWORD;
 	protected static int PROJECT_ID;
 	protected static String PROJECT_KEY;
-	protected static int USER_ID;
+	protected static String USER_NAME;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -36,7 +36,7 @@ public abstract class BaseBtiTest {
 		PASSWORD = properties.getProperty("PASSWORD");
 		PROJECT_ID = Integer.valueOf(properties.getProperty("PROJECT_ID"));
 		PROJECT_KEY = properties.getProperty("PROJECT_KEY");
-		USER_ID = Integer.valueOf(properties.getProperty("USER_ID"));
+		USER_NAME = properties.getProperty("USER_NAME");
 	}
 
 }
