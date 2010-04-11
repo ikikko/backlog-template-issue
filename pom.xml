@@ -2,9 +2,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.ikikko</groupId>
   <artifactId>backlog-template-issue</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1-SNAPSHOT</version>
   <scm>
-  	<connection>scm:svn:https://svn.sourceforge.jp/svnroot/ikikko/backlog-template-issue/tags/backlog-template-issue-1.1.0</connection>
+  	<connection>scm:svn:https://svn.sourceforge.jp/svnroot/ikikko/backlog-template-issue/trunk</connection>
   </scm>
   <build>
     <plugins>
