@@ -22,9 +22,9 @@ public class BacklogDataRegistryTest extends BaseBtiTest {
 	@Before
 	public void setUp() throws Exception {
 		client = new BacklogApiClient();
-		client.login(SPACE, USERNAME, PASSWORD);
+		client.login(BACKLOG_SPACE, BACKLOG_USERNAME, BACKLOG_PASSWORD);
 
-		registry = new BacklogDataRegistry(client, PROJECT_KEY);
+		registry = new BacklogDataRegistry(client, BACKLOG_PROJECT_KEY);
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class BacklogDataRegistryTest extends BaseBtiTest {
 
 	@Test
 	public void getRegisteredUserで成功() throws Exception {
-		User actual = registry.getRegisteredUser(USER_NAME);
+		User actual = registry.getRegisteredUser(BACKLOG_USER_NAME);
 
 		assertThat(actual, is(notNullValue()));
 	}

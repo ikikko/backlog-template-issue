@@ -3,46 +3,27 @@ package jp.ikikko.bti.gdata;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Properties;
 
+import jp.ikikko.bti.BaseBtiTest;
 import jp.ikikko.bti.backlog.BacklogApiClient;
 import jp.ikikko.bti.backlog.BacklogDataRegistry;
 import jp.ikikko.bti.entity.Issue;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.gdata.util.AuthenticationException;
 
-public class GdataServiceTest {
-
-	private static String USERNAME;
-	private static String PASSWORD;
-	private static URL SPREADSHEET_URL;
+public class GdataServiceTest extends BaseBtiTest {
 
 	private GdataService service;
-
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		Properties properties = new Properties();
-
-		InputStream propertyFile = GdataServiceTest.class
-				.getResourceAsStream("gdataService.properties");
-		properties.load(propertyFile);
-
-		USERNAME = properties.getProperty("USERNAME");
-		PASSWORD = properties.getProperty("PASSWORD");
-		SPREADSHEET_URL = new URL(properties.getProperty("SPREADSHEET_URL"));
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		service = new GdataService();
-		service.login(USERNAME, PASSWORD);
+		service.login(GDATA_USERNAME, GDATA_PASSWORD);
 	}
 
 	@Test(expected = AuthenticationException.class)
@@ -52,15 +33,15 @@ public class GdataServiceTest {
 
 	@Test
 	public void getTemplateIssues() throws Exception {
-		service.login(USERNAME, PASSWORD);
+		service.login(GDATA_USERNAME, GDATA_PASSWORD);
 
-		// FIXME ちゃんとした値を外部プロパティから読み込む
 		BacklogApiClient backlogApiClient = new BacklogApiClient();
-		backlogApiClient.login("XXXX", "XXXX", "XXXX");
+		backlogApiClient.login(BACKLOG_SPACE, BACKLOG_USERNAME,
+				BACKLOG_PASSWORD);
 		BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
-				backlogApiClient, "XXXX");
-		Collection<Issue> issues = service.getTemplateIssues(SPREADSHEET_URL,
-				backlogDataRegistry);
+				backlogApiClient, BACKLOG_PROJECT_KEY);
+		Collection<Issue> issues = service.getTemplateIssues(
+				GDATA_SPREADSHEET_URL, backlogDataRegistry);
 
 		for (Issue issue : issues) {
 			assertThat(issue.getSummary(), is(notNullValue()));

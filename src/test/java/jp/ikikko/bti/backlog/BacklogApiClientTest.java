@@ -22,7 +22,7 @@ public class BacklogApiClientTest extends BaseBtiTest {
 	@Before
 	public void setUp() throws Exception {
 		client = new BacklogApiClient();
-		client.login(SPACE, USERNAME, PASSWORD);
+		client.login(BACKLOG_SPACE, BACKLOG_USERNAME, BACKLOG_PASSWORD);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -32,14 +32,14 @@ public class BacklogApiClientTest extends BaseBtiTest {
 
 	@Test
 	public void getProject() throws Exception {
-		Project project = client.getProject(PROJECT_KEY);
+		Project project = client.getProject(BACKLOG_PROJECT_KEY);
 
 		assertThat(project, is(notNullValue()));
 	}
 
 	@Test
 	public void getUser() throws Exception {
-		User user = client.getUser(USERNAME);
+		User user = client.getUser(BACKLOG_USERNAME);
 
 		assertThat(user, is(notNullValue()));
 	}
@@ -50,14 +50,14 @@ public class BacklogApiClientTest extends BaseBtiTest {
 		Issue newIssue = new Issue();
 		newIssue.setSummary("Backlog API テスト登録");
 
-		Issue issue = client.createIssue(PROJECT_ID, newIssue);
+		Issue issue = client.createIssue(BACKLOG_PROJECT_ID, newIssue);
 
 		assertThat(issue, is(notNullValue()));
 	}
 
 	@Test
 	public void getUsers() throws Exception {
-		Collection<User> users = client.getUsers(PROJECT_ID);
+		Collection<User> users = client.getUsers(BACKLOG_PROJECT_ID);
 
 		assertThat(users, is(notNullValue()));
 		for (User user : users) {
