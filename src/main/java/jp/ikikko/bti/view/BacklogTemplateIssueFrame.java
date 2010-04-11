@@ -13,17 +13,14 @@ package jp.ikikko.bti.view;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Collection;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
+import jp.ikikko.bti.BacklogTemplateIssue;
 
-import jp.ikikko.bti.backlog.BacklogApiClient;
 import jp.ikikko.bti.entity.Issue;
-import jp.ikikko.bti.entity.Project;
-import jp.ikikko.bti.gdata.GdataService;
 import jp.ikikko.bti.view.util.HTMLDocumentUtil;
 
 /**
@@ -297,17 +294,10 @@ public class BacklogTemplateIssueFrame extends javax.swing.JFrame {
         Element body = HTMLDocumentUtil.getBodyElement(document);
 
         try {
-            GdataService service = new GdataService();
-            service.login(googleId.getText(), new String(googlePassword.getPassword()));
-            Collection<Issue> issues = service.getTemplateIssues(new URL(googleUrl.getText()));
+            Collection<Issue> newIssues = new BacklogTemplateIssue().createIssue(googleId.getText(), new String(googlePassword.getPassword()), googleUrl.getText(), backlogSpace.getText(), backlogId.getText(), new String(backlogPassword.getPassword()), backlogProject.getText());
 
-            BacklogApiClient client = new BacklogApiClient();
-            client.login(backlogSpace.getText(), backlogId.getText(), new String(backlogPassword.getPassword()));
-
-            Project project = client.getProject(backlogProject.getText());
-            for (Issue newIssue : issues) {
-                Issue issue = client.createIssue(project.getId(), newIssue);
-                document.insertBeforeStart(body, "ISSUE : " + "<a href='" + issue.getUrl() + "'>" + "[" + issue.getKey() + "] " + issue.getSummary() + "</a><br>");
+            for (Issue newIssue : newIssues) {
+                document.insertBeforeStart(body, "ISSUE : " + "<a href='" + newIssue.getUrl() + "'>" + "[" + newIssue.getKey() + "] " + newIssue.getSummary() + "</a><br>");
             }
         } catch (BadLocationException e) {
             throw new RuntimeException(e);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jp.ikikko.bti.backlog.BacklogApiClient;
+import jp.ikikko.bti.backlog.BacklogDataRegistry;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
 import jp.ikikko.bti.gdata.GdataService;
@@ -27,15 +28,20 @@ public class BacklogTemplateIssue {
 			throws MalformedURLException, ServiceException, IOException,
 			XmlRpcException {
 
+		// Googleドキュメント, Backlogにlogin
 		gdataService.login(googleId, new String(googlePassword));
-		Collection<Issue> issues = gdataService.getTemplateIssues(new URL(
-				googleUrl));
-
 		backlogApiClient.login(backlogSpace, backlogId, new String(
 				backlogPassword));
 
-		Collection<Issue> newIssues = new ArrayList<Issue>();
+		// Googleドキュメントから課題情報取得
 		Project project = backlogApiClient.getProject(backlogProject);
+		BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
+				backlogApiClient, backlogProject);
+		Collection<Issue> issues = gdataService.getTemplateIssues(new URL(
+				googleUrl), backlogDataRegistry);
+
+		// Backlogに課題登録
+		Collection<Issue> newIssues = new ArrayList<Issue>();
 		for (Issue issue : issues) {
 			newIssues.add(backlogApiClient.createIssue(project.getId(), issue));
 		}

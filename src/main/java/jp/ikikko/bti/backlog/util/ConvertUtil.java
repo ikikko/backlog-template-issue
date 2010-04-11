@@ -261,8 +261,12 @@ public class ConvertUtil {
 					.asList(issue.getMilestoneVersions()));
 		}
 
-		request.put("priority", issue.getPriority());
-		request.put("assignerId", issue.getAssignerUser().getId());
+		if (issue.getPriority() == 0) {
+			request.put("priority", issue.getPriority());
+		}
+		if (issue.getAssignerUser() != null) {
+			request.put("assignerId", issue.getAssignerUser().getId());
+		}
 
 		return request;
 	}

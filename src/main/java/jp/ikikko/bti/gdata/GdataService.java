@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.ikikko.bti.backlog.BacklogDataRegistry;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.User;
 
@@ -53,8 +54,9 @@ public class GdataService {
 	/**
 	 * テンプレートの課題情報を取得します。
 	 */
-	public Collection<Issue> getTemplateIssues(URL url)
-			throws ServiceException, IOException {
+	public Collection<Issue> getTemplateIssues(URL url,
+			BacklogDataRegistry backlogDataRegistry) throws ServiceException,
+			IOException {
 
 		String key = getSpreadsheetKey(url);
 		URL entryUrl = new URL(
@@ -68,7 +70,7 @@ public class GdataService {
 
 		List<Issue> issues = new ArrayList<Issue>();
 		for (ListEntry list : listFeed.getEntries()) {
-			issues.add(createIssueFromSingleList(list));
+			issues.add(createIssueFromSingleList(list, backlogDataRegistry));
 		}
 
 		return issues;
@@ -92,7 +94,8 @@ public class GdataService {
 	/**
 	 * スプレッドシートの1行から、{@link Issue} を作成します。
 	 */
-	Issue createIssueFromSingleList(ListEntry list) {
+	Issue createIssueFromSingleList(ListEntry list,
+			BacklogDataRegistry backlogDataRegistry) {
 		Issue issue = new Issue();
 		CustomElementCollection elements = list.getCustomElements();
 
@@ -131,10 +134,12 @@ public class GdataService {
 		if (elements.getValue("優先度ID") != null) {
 			issue.setPriority(Integer.valueOf(elements.getValue("優先度ID")));
 		}
-		if (elements.getValue("担当者ユーザID") != null) {
-			Integer assignerUserId = Integer.valueOf(elements
-					.getValue("担当者ユーザID"));
-			issue.setAssignerUser(new User(null, assignerUserId, null));
+		if (elements.getValue("担当者ユーザ名") != null) {
+			User registeredUser = backlogDataRegistry
+					.getRegisteredUser(elements.getValue("担当者ユーザ名"));
+			if (registeredUser != null) {
+				issue.setAssignerUser(registeredUser);
+			}
 		}
 
 		return issue;

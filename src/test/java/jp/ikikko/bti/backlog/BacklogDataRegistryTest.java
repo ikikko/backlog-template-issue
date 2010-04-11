@@ -6,8 +6,6 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 
 import jp.ikikko.bti.BaseBtiTest;
-import jp.ikikko.bti.backlog.BacklogApiClient;
-import jp.ikikko.bti.backlog.BacklogDataRegistry;
 import jp.ikikko.bti.entity.User;
 
 import org.junit.Before;

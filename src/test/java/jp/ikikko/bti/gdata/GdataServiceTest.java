@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Properties;
 
+import jp.ikikko.bti.backlog.BacklogApiClient;
+import jp.ikikko.bti.backlog.BacklogDataRegistry;
 import jp.ikikko.bti.entity.Issue;
 
 import org.junit.Before;
@@ -51,7 +53,14 @@ public class GdataServiceTest {
 	@Test
 	public void getTemplateIssues() throws Exception {
 		service.login(USERNAME, PASSWORD);
-		Collection<Issue> issues = service.getTemplateIssues(SPREADSHEET_URL);
+
+		// FIXME ちゃんとした値を外部プロパティから読み込む
+		BacklogApiClient backlogApiClient = new BacklogApiClient();
+		backlogApiClient.login("XXXX", "XXXX", "XXXX");
+		BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
+				backlogApiClient, "XXXX");
+		Collection<Issue> issues = service.getTemplateIssues(SPREADSHEET_URL,
+				backlogDataRegistry);
 
 		for (Issue issue : issues) {
 			assertThat(issue.getSummary(), is(notNullValue()));
@@ -66,8 +75,6 @@ public class GdataServiceTest {
 			assertThat(issue.getMilestoneVersions()[0], is(notNullValue()));
 			assertThat(issue.getPriority(), is(notNullValue()));
 			assertThat(issue.getAssignerUser(), is(notNullValue()));
-
-			System.out.println(issue);
 		}
 	}
 
