@@ -16,17 +16,18 @@ import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
 public class BacklogApiClient {
 
-	private XmlRpcClient client;
+	private final XmlRpcClient client;
 
 	public BacklogApiClient() {
 		client = new XmlRpcClient();
 	}
 
-	public void login(String space, String userName, String password) {
-		String url = "https://" + space + ".backlog.jp/XML-RPC";
+	public void login(final String space, final String userName,
+			final String password) {
+		final String url = "https://" + space + ".backlog.jp/XML-RPC";
 
 		try {
-			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+			final XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 			config.setServerURL(new URL(url));
 			config.setBasicUserName(userName);
 			config.setBasicPassword(password);
@@ -34,9 +35,9 @@ public class BacklogApiClient {
 			client.setConfig(config);
 
 			getUser(userName);
-		} catch (MalformedURLException e) {
+		} catch (final MalformedURLException e) {
 			throw new RuntimeException(e);
-		} catch (XmlRpcException e) {
+		} catch (final XmlRpcException e) {
 			throw new IllegalArgumentException("Login Failed.");
 		}
 	}
@@ -49,11 +50,11 @@ public class BacklogApiClient {
 	 * @see http://www.backlog.jp/api/method###.html
 	 * 
 	 */
-	public User getUser(String userId) throws XmlRpcException {
-		Object[] params = new Object[] { userId };
+	public User getUser(final String userId) throws XmlRpcException {
+		final Object[] params = new Object[] { userId };
 
-		Object result = client.execute(Method.GET_USER.getName(), params);
-		User user = ConvertUtil.responseToUser(result);
+		final Object result = client.execute(Method.GET_USER.getName(), params);
+		final User user = ConvertUtil.responseToUser(result);
 
 		return user;
 	}
@@ -66,11 +67,12 @@ public class BacklogApiClient {
 	 * @see http://www.backlog.jp/api/method1_2.html
 	 * 
 	 */
-	public Project getProject(String key) throws XmlRpcException {
-		Object[] params = new Object[] { key };
+	public Project getProject(final String key) throws XmlRpcException {
+		final Object[] params = new Object[] { key };
 
-		Object result = client.execute(Method.GET_PROJECT.getName(), params);
-		Project project = ConvertUtil.responseToProject(result);
+		final Object result = client.execute(Method.GET_PROJECT.getName(),
+				params);
+		final Project project = ConvertUtil.responseToProject(result);
 
 		return project;
 	}
@@ -83,14 +85,16 @@ public class BacklogApiClient {
 	 * @see http://www.backlog.jp/api/method4_1.html
 	 * 
 	 */
-	public Issue createIssue(int projectId, Issue newIssue)
+	public Issue createIssue(final int projectId, final Issue newIssue)
 			throws XmlRpcException {
-		Map<String, Object> request = ConvertUtil.issueToRequest(newIssue);
+		final Map<String, Object> request = ConvertUtil
+				.issueToRequest(newIssue);
 		request.put("projectId", projectId);
-		Object[] params = new Object[] { request };
+		final Object[] params = new Object[] { request };
 
-		Object result = client.execute(Method.CREATE_ISSUE.getName(), params);
-		Issue issue = ConvertUtil.responseToIssue(result);
+		final Object result = client.execute(Method.CREATE_ISSUE.getName(),
+				params);
+		final Issue issue = ConvertUtil.responseToIssue(result);
 
 		return issue;
 	}
@@ -103,11 +107,13 @@ public class BacklogApiClient {
 	 * @see http://www.backlog.jp/api/method2_2.html
 	 * 
 	 */
-	public Collection<User> getUsers(int projectId) throws XmlRpcException {
-		Object[] params = new Object[] { projectId };
+	public Collection<User> getUsers(final int projectId)
+			throws XmlRpcException {
+		final Object[] params = new Object[] { projectId };
 
-		Object result = client.execute(Method.GET_USERS.getName(), params);
-		Collection<User> users = ConvertUtil.responseToUsers(result);
+		final Object result = client
+				.execute(Method.GET_USERS.getName(), params);
+		final Collection<User> users = ConvertUtil.responseToUsers(result);
 
 		return users;
 	}

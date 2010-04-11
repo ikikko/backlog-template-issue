@@ -18,13 +18,14 @@ import com.google.gdata.util.ServiceException;
 
 public class BacklogTemplateIssue {
 
-	private GdataService gdataService = new GdataService();
+	private final GdataService gdataService = new GdataService();
 
-	private BacklogApiClient backlogApiClient = new BacklogApiClient();
+	private final BacklogApiClient backlogApiClient = new BacklogApiClient();
 
-	public Collection<Issue> createIssue(String googleId,
-			String googlePassword, String googleUrl, String backlogSpace,
-			String backlogId, String backlogPassword, String backlogProject)
+	public Collection<Issue> createIssue(final String googleId,
+			final String googlePassword, final String googleUrl,
+			final String backlogSpace, final String backlogId,
+			final String backlogPassword, final String backlogProject)
 			throws MalformedURLException, ServiceException, IOException,
 			XmlRpcException {
 
@@ -34,15 +35,15 @@ public class BacklogTemplateIssue {
 				backlogPassword));
 
 		// Googleドキュメントから課題情報取得
-		Project project = backlogApiClient.getProject(backlogProject);
-		BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
+		final Project project = backlogApiClient.getProject(backlogProject);
+		final BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
 				backlogApiClient, backlogProject);
-		Collection<Issue> issues = gdataService.getTemplateIssues(new URL(
-				googleUrl), backlogDataRegistry);
+		final Collection<Issue> issues = gdataService.getTemplateIssues(
+				new URL(googleUrl), backlogDataRegistry);
 
 		// Backlogに課題登録
-		Collection<Issue> newIssues = new ArrayList<Issue>();
-		for (Issue issue : issues) {
+		final Collection<Issue> newIssues = new ArrayList<Issue>();
+		for (final Issue issue : issues) {
 			newIssues.add(backlogApiClient.createIssue(project.getId(), issue));
 		}
 

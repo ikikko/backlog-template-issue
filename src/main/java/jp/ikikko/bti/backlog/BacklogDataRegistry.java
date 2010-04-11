@@ -9,11 +9,11 @@ import org.apache.xmlrpc.XmlRpcException;
 
 public class BacklogDataRegistry {
 
-	private Collection<User> registeredUsers;
+	private final Collection<User> registeredUsers;
 
-	public BacklogDataRegistry(BacklogApiClient client, String key)
+	public BacklogDataRegistry(final BacklogApiClient client, final String key)
 			throws XmlRpcException {
-		Project project = client.getProject(key);
+		final Project project = client.getProject(key);
 
 		registeredUsers = client.getUsers(project.getId());
 	}
@@ -23,8 +23,8 @@ public class BacklogDataRegistry {
 	 * 
 	 * @return 一致する {@link User} が見つかった場合はその {@link User} 、 見つからなかった場合は null
 	 */
-	public User getRegisteredUser(String userName) {
-		for (User user : registeredUsers) {
+	public User getRegisteredUser(final String userName) {
+		for (final User user : registeredUsers) {
 			if (user.getName().equals(userName)) {
 				return user;
 			}

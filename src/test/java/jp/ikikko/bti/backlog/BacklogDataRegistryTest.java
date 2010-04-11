@@ -29,24 +29,24 @@ public class BacklogDataRegistryTest extends BaseBtiTest {
 
 	@Test
 	public void コンストラクタ() throws Exception {
-		Collection<User> users = registry.getRegisteredUsers();
+		final Collection<User> users = registry.getRegisteredUsers();
 
 		assertThat(users.size(), is(not(0)));
-		for (User user : users) {
+		for (final User user : users) {
 			assertThat(user, is(notNullValue()));
 		}
 	}
 
 	@Test
 	public void getRegisteredUserで成功() throws Exception {
-		User actual = registry.getRegisteredUser(BACKLOG_USER_NAME);
+		final User actual = registry.getRegisteredUser(BACKLOG_USER_NAME);
 
 		assertThat(actual, is(notNullValue()));
 	}
 
 	@Test
 	public void getRegisteredUserで失敗() throws Exception {
-		User actual = registry.getRegisteredUser(DUMMY_USER_NAME);
+		final User actual = registry.getRegisteredUser(DUMMY_USER_NAME);
 
 		assertThat(actual, is(nullValue()));
 	}

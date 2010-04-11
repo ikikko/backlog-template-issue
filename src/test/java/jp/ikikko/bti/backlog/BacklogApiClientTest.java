@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 
 import jp.ikikko.bti.BaseBtiTest;
-import jp.ikikko.bti.backlog.BacklogApiClient;
 import jp.ikikko.bti.entity.Issue;
 import jp.ikikko.bti.entity.Project;
 import jp.ikikko.bti.entity.User;
@@ -32,14 +31,14 @@ public class BacklogApiClientTest extends BaseBtiTest {
 
 	@Test
 	public void getProject() throws Exception {
-		Project project = client.getProject(BACKLOG_PROJECT_KEY);
+		final Project project = client.getProject(BACKLOG_PROJECT_KEY);
 
 		assertThat(project, is(notNullValue()));
 	}
 
 	@Test
 	public void getUser() throws Exception {
-		User user = client.getUser(BACKLOG_USERNAME);
+		final User user = client.getUser(BACKLOG_USERNAME);
 
 		assertThat(user, is(notNullValue()));
 	}
@@ -47,20 +46,20 @@ public class BacklogApiClientTest extends BaseBtiTest {
 	@Ignore("更新系APIは、普段のユニットテストでは実行しない")
 	@Test
 	public void createIssue() throws Exception {
-		Issue newIssue = new Issue();
+		final Issue newIssue = new Issue();
 		newIssue.setSummary("Backlog API テスト登録");
 
-		Issue issue = client.createIssue(BACKLOG_PROJECT_ID, newIssue);
+		final Issue issue = client.createIssue(BACKLOG_PROJECT_ID, newIssue);
 
 		assertThat(issue, is(notNullValue()));
 	}
 
 	@Test
 	public void getUsers() throws Exception {
-		Collection<User> users = client.getUsers(BACKLOG_PROJECT_ID);
+		final Collection<User> users = client.getUsers(BACKLOG_PROJECT_ID);
 
 		assertThat(users, is(notNullValue()));
-		for (User user : users) {
+		for (final User user : users) {
 			assertThat(user, is(notNullValue()));
 		}
 	}

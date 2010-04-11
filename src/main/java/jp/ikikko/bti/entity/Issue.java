@@ -8,12 +8,15 @@ public class Issue {
 	public Issue() {
 	}
 
-	public Issue(String key, String summary, String description, String url,
-			Date startDate, Date dueDate, Double estimatedHours,
-			Double actualHours, String issueType, String[] components,
-			String[] affectsVersions, String[] milestoneVersions, int priority,
-			String resolution, String status, User assignerUser,
-			User createdUser, Date createdOn, Date updatedOn) {
+	public Issue(final String key, final String summary,
+			final String description, final String url, final Date startDate,
+			final Date dueDate, final Double estimatedHours,
+			final Double actualHours, final String issueType,
+			final String[] components, final String[] affectsVersions,
+			final String[] milestoneVersions, final int priority,
+			final String resolution, final String status,
+			final User assignerUser, final User createdUser,
+			final Date createdOn, final Date updatedOn) {
 		this.key = key;
 		this.summary = summary;
 		this.description = description;
@@ -96,7 +99,7 @@ public class Issue {
 		return key;
 	}
 
-	public void setKey(String key) {
+	public void setKey(final String key) {
 		this.key = key;
 	}
 
@@ -104,7 +107,7 @@ public class Issue {
 		return summary;
 	}
 
-	public void setSummary(String summary) {
+	public void setSummary(final String summary) {
 		this.summary = summary;
 	}
 
@@ -112,7 +115,7 @@ public class Issue {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -120,7 +123,7 @@ public class Issue {
 		return startDate;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(final String url) {
 		this.url = url;
 	}
 
@@ -128,7 +131,7 @@ public class Issue {
 		return url;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -136,7 +139,7 @@ public class Issue {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(final Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -144,7 +147,7 @@ public class Issue {
 		return estimatedHours;
 	}
 
-	public void setEstimatedHours(Double estimatedHours) {
+	public void setEstimatedHours(final Double estimatedHours) {
 		this.estimatedHours = estimatedHours;
 	}
 
@@ -152,7 +155,7 @@ public class Issue {
 		return actualHours;
 	}
 
-	public void setActualHours(Double actualHours) {
+	public void setActualHours(final Double actualHours) {
 		this.actualHours = actualHours;
 	}
 
@@ -160,7 +163,7 @@ public class Issue {
 		return issueType;
 	}
 
-	public void setIssueType(String issueType) {
+	public void setIssueType(final String issueType) {
 		this.issueType = issueType;
 	}
 
@@ -168,7 +171,7 @@ public class Issue {
 		return components;
 	}
 
-	public void setComponents(String[] components) {
+	public void setComponents(final String[] components) {
 		this.components = components;
 	}
 
@@ -176,7 +179,7 @@ public class Issue {
 		return affectsVersions;
 	}
 
-	public void setAffectsVersions(String[] affectsVersions) {
+	public void setAffectsVersions(final String[] affectsVersions) {
 		this.affectsVersions = affectsVersions;
 	}
 
@@ -184,7 +187,7 @@ public class Issue {
 		return milestoneVersions;
 	}
 
-	public void setMilestoneVersions(String[] milestoneVersions) {
+	public void setMilestoneVersions(final String[] milestoneVersions) {
 		this.milestoneVersions = milestoneVersions;
 	}
 
@@ -192,7 +195,7 @@ public class Issue {
 		return priority;
 	}
 
-	public void setPriority(int priority) {
+	public void setPriority(final int priority) {
 		this.priority = priority;
 	}
 
@@ -200,7 +203,7 @@ public class Issue {
 		return resolution;
 	}
 
-	public void setResolution(String resolution) {
+	public void setResolution(final String resolution) {
 		this.resolution = resolution;
 	}
 
@@ -208,7 +211,7 @@ public class Issue {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(final String status) {
 		this.status = status;
 	}
 
@@ -216,7 +219,7 @@ public class Issue {
 		return assignerUser;
 	}
 
-	public void setAssignerUser(User assignerUser) {
+	public void setAssignerUser(final User assignerUser) {
 		this.assignerUser = assignerUser;
 	}
 
@@ -224,7 +227,7 @@ public class Issue {
 		return createdUser;
 	}
 
-	public void setCreatedUser(User createdUser) {
+	public void setCreatedUser(final User createdUser) {
 		this.createdUser = createdUser;
 	}
 
@@ -232,7 +235,7 @@ public class Issue {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(final Date createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -240,7 +243,7 @@ public class Issue {
 		return updatedOn;
 	}
 
-	public void setUpdatedOn(Date updatedOn) {
+	public void setUpdatedOn(final Date updatedOn) {
 		this.updatedOn = updatedOn;
 	}
 

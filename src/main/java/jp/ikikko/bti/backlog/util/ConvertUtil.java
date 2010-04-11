@@ -24,20 +24,20 @@ public class ConvertUtil {
 	 * XML-RPC のレスポンスを {@link Project} に変換します。
 	 */
 	@SuppressWarnings("unchecked")
-	public static Project responseToProject(Object response) {
+	public static Project responseToProject(final Object response) {
 		if (response == null) {
 			return null;
 		}
 
-		Map<String, Object> map = (Map<String, Object>) response;
+		final Map<String, Object> map = (Map<String, Object>) response;
 		if (map.isEmpty()) {
 			return null;
 		}
 
-		int id = ((Integer) map.get("id")).intValue();
-		String name = (String) map.get("name");
-		String key = (String) map.get("key");
-		String url = (String) map.get("url");
+		final int id = ((Integer) map.get("id")).intValue();
+		final String name = (String) map.get("name");
+		final String key = (String) map.get("key");
+		final String url = (String) map.get("url");
 
 		return new Project(id, name, key, url);
 	}
@@ -46,84 +46,85 @@ public class ConvertUtil {
 	 * XML-RPC のレスポンスを {@link Issue} に変換します。
 	 */
 	@SuppressWarnings("unchecked")
-	public static Issue responseToIssue(Object response) {
+	public static Issue responseToIssue(final Object response) {
 		if (response == null) {
 			return null;
 		}
 
-		Map<String, Object> map = (Map<String, Object>) response;
+		final Map<String, Object> map = (Map<String, Object>) response;
 		if (map.isEmpty()) {
 			return null;
 		}
 
-		String key = (String) map.get("key");
-		String summary = (String) map.get("summary");
-		String description = (String) map.get("description");
-		String url = (String) map.get("url");
+		final String key = (String) map.get("key");
+		final String summary = (String) map.get("summary");
+		final String description = (String) map.get("description");
+		final String url = (String) map.get("url");
 
-		Date startDate = responseToDate(map.get("start_date"));
-		Date dueDate = responseToDate(map.get("due_date"));
-		Double estimatedHours = (Double) map.get("estimated_hours");
-		Double actualHours = (Double) map.get("actual_hours");
+		final Date startDate = responseToDate(map.get("start_date"));
+		final Date dueDate = responseToDate(map.get("due_date"));
+		final Double estimatedHours = (Double) map.get("estimated_hours");
+		final Double actualHours = (Double) map.get("actual_hours");
 
 		String issueType = null;
-		Map<String, Object> issueTypeObj = (Map<String, Object>) map
+		final Map<String, Object> issueTypeObj = (Map<String, Object>) map
 				.get("issueType");
 		if (issueTypeObj != null) {
 			issueType = (String) issueTypeObj.get("name");
 		}
 
 		String[] components = null;
-		Object[] componentObjs = (Object[]) map.get("components");
+		final Object[] componentObjs = (Object[]) map.get("components");
 		if (componentObjs != null) {
 			components = new String[componentObjs.length];
 			for (int i = 0; i < componentObjs.length; i++) {
-				Map<String, Object> componentObj = (Map<String, Object>) componentObjs[i];
+				final Map<String, Object> componentObj = (Map<String, Object>) componentObjs[i];
 				components[i] = (String) componentObj.get("name");
 			}
 		}
 		String[] affectsVersions = null;
-		Object[] affectsVersionObjs = (Object[]) map.get("versions");
+		final Object[] affectsVersionObjs = (Object[]) map.get("versions");
 		if (affectsVersionObjs != null) {
 			affectsVersions = new String[affectsVersionObjs.length];
 			for (int i = 0; i < affectsVersionObjs.length; i++) {
-				Map<String, Object> affectsVersionObj = (Map<String, Object>) affectsVersionObjs[i];
+				final Map<String, Object> affectsVersionObj = (Map<String, Object>) affectsVersionObjs[i];
 				affectsVersions[i] = (String) affectsVersionObj.get("name");
 			}
 		}
 		String[] milestoneVersions = null;
-		Object[] milestoneObjs = (Object[]) map.get("milestones");
+		final Object[] milestoneObjs = (Object[]) map.get("milestones");
 		if (milestoneObjs != null) {
 			milestoneVersions = new String[milestoneObjs.length];
 			for (int i = 0; i < milestoneObjs.length; i++) {
-				Map<String, Object> milestoneObj = (Map<String, Object>) milestoneObjs[i];
+				final Map<String, Object> milestoneObj = (Map<String, Object>) milestoneObjs[i];
 				milestoneVersions[i] = (String) milestoneObj.get("name");
 			}
 		}
 
 		int priority = 0;
-		Map<String, Object> priorityObj = (Map<String, Object>) map
+		final Map<String, Object> priorityObj = (Map<String, Object>) map
 				.get("priority");
 		if (priorityObj != null) {
 			priority = (Integer) priorityObj.get("id");
 		}
 		String resolution = null;
-		Map<String, Object> resolutionObj = (Map<String, Object>) map
+		final Map<String, Object> resolutionObj = (Map<String, Object>) map
 				.get("resolution");
 		if (resolutionObj != null) {
 			resolution = (String) resolutionObj.get("name");
 		}
 		String status = null;
-		Map<String, Object> statusObj = (Map<String, Object>) map.get("status");
+		final Map<String, Object> statusObj = (Map<String, Object>) map
+				.get("status");
 		if (statusObj != null) {
 			status = (String) statusObj.get("name");
 		}
 
-		User assignerUser = responseToUser(map.get("assigner"));
-		User createdUser = responseToUser(map.get("created_user"));
+		final User assignerUser = responseToUser(map.get("assigner"));
+		final User createdUser = responseToUser(map.get("created_user"));
 
-		Date createdOn = responseToDatetime(map.get("created_on"));
-		Date updatedOn = responseToDatetime(map.get("updated_on"));
+		final Date createdOn = responseToDatetime(map.get("created_on"));
+		final Date updatedOn = responseToDatetime(map.get("updated_on"));
 
 		return new Issue(key, summary, description, url, startDate, dueDate,
 				estimatedHours, actualHours, issueType, components,
@@ -134,22 +135,22 @@ public class ConvertUtil {
 	/**
 	 * XML-RPC のレスポンスを {@link Date} に変換します。
 	 */
-	public static Date responseToDate(Object value) {
+	public static Date responseToDate(final Object value) {
 		if (value == null || value.equals("")) {
 			return null;
 		}
 		if (!(value instanceof String)) {
 			throw new IllegalArgumentException("illegal date type " + value);
 		}
-		String dateString = (String) value;
+		final String dateString = (String) value;
 		if (dateString.length() != 8) {
 			throw new IllegalArgumentException("illegal date format " + value);
 		}
 
 		try {
-			Date date = DateUtil.parseYyyyMMddHHmmssSSS(dateString);
+			final Date date = DateUtil.parseYyyyMMddHHmmssSSS(dateString);
 			return date;
-		} catch (IllegalArgumentException e) {
+		} catch (final IllegalArgumentException e) {
 			return null;
 		}
 	}
@@ -157,23 +158,23 @@ public class ConvertUtil {
 	/**
 	 * XML-RPC のレスポンスを {@link Date} に変換します。
 	 */
-	public static Date responseToDatetime(Object value) {
+	public static Date responseToDatetime(final Object value) {
 		if (value == null) {
 			return null;
 		}
 		if (!(value instanceof String)) {
 			throw new IllegalArgumentException("illegal date type " + value);
 		}
-		String dateString = (String) value;
+		final String dateString = (String) value;
 		if (dateString.length() != 14) {
 			throw new IllegalArgumentException("illegal date format " + value);
 		}
 
 		try {
-			Date date = DateUtil.parseYyyyMMddHHmmssSSS(StringUtil.fill(
+			final Date date = DateUtil.parseYyyyMMddHHmmssSSS(StringUtil.fill(
 					dateString, 16, '0'));
 			return date;
-		} catch (IllegalArgumentException e) {
+		} catch (final IllegalArgumentException e) {
 			return null;
 		}
 	}
@@ -182,20 +183,20 @@ public class ConvertUtil {
 	 * XML-RPC のレスポンスを {@link User} に変換します。
 	 */
 	@SuppressWarnings("unchecked")
-	public static User responseToUser(Object value) {
+	public static User responseToUser(final Object value) {
 		if (value == null) {
 			return null;
 		}
 
-		Map<String, Object> map = (Map<String, Object>) value;
+		final Map<String, Object> map = (Map<String, Object>) value;
 		if (map.isEmpty()) {
 			return null;
 		}
 
-		String name = (String) map.get("name");
-		int id = ((Integer) map.get("id")).intValue();
-		Date updatedOn = responseToDatetime(map.get("updated_on"));
-		User user = new User(name, id, updatedOn);
+		final String name = (String) map.get("name");
+		final int id = ((Integer) map.get("id")).intValue();
+		final Date updatedOn = responseToDatetime(map.get("updated_on"));
+		final User user = new User(name, id, updatedOn);
 
 		return user;
 	}
@@ -203,13 +204,13 @@ public class ConvertUtil {
 	/**
 	 * XML-RPC のレスポンスを {@link User} の collection に変換します。
 	 */
-	public static Collection<User> responseToUsers(Object value) {
+	public static Collection<User> responseToUsers(final Object value) {
 		if (value == null) {
 			return null;
 		}
 
-		Object[] objects = (Object[]) value;
-		Collection<User> users = new ArrayList<User>(objects.length);
+		final Object[] objects = (Object[]) value;
+		final Collection<User> users = new ArrayList<User>(objects.length);
 		for (int i = 0; i < objects.length; i++) {
 			users.add(responseToUser(objects[i]));
 		}
@@ -220,8 +221,8 @@ public class ConvertUtil {
 	/**
 	 * {@link Issue} を XML-RPC のリクエストに変換します。
 	 */
-	public static Map<String, Object> issueToRequest(Issue issue) {
-		Map<String, Object> request = new HashMap<String, Object>();
+	public static Map<String, Object> issueToRequest(final Issue issue) {
+		final Map<String, Object> request = new HashMap<String, Object>();
 
 		if (issue.getSummary() != null) {
 			request.put("summary", issue.getSummary());

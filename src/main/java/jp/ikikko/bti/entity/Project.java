@@ -17,7 +17,8 @@ public class Project {
 	public Project() {
 	}
 
-	public Project(int id, String name, String key, String url) {
+	public Project(final int id, final String name, final String key,
+			final String url) {
 		this.id = id;
 		this.name = name;
 		this.key = key;
@@ -28,7 +29,7 @@ public class Project {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -36,7 +37,7 @@ public class Project {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -44,7 +45,7 @@ public class Project {
 		return key;
 	}
 
-	public void setKey(String key) {
+	public void setKey(final String key) {
 		this.key = key;
 	}
 
@@ -52,7 +53,7 @@ public class Project {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(final String url) {
 		this.url = url;
 	}
 

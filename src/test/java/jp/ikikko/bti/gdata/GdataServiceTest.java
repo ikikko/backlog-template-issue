@@ -35,15 +35,15 @@ public class GdataServiceTest extends BaseBtiTest {
 	public void getTemplateIssues() throws Exception {
 		service.login(GDATA_USERNAME, GDATA_PASSWORD);
 
-		BacklogApiClient backlogApiClient = new BacklogApiClient();
+		final BacklogApiClient backlogApiClient = new BacklogApiClient();
 		backlogApiClient.login(BACKLOG_SPACE, BACKLOG_USERNAME,
 				BACKLOG_PASSWORD);
-		BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
+		final BacklogDataRegistry backlogDataRegistry = new BacklogDataRegistry(
 				backlogApiClient, BACKLOG_PROJECT_KEY);
-		Collection<Issue> issues = service.getTemplateIssues(
+		final Collection<Issue> issues = service.getTemplateIssues(
 				GDATA_SPREADSHEET_URL, backlogDataRegistry);
 
-		for (Issue issue : issues) {
+		for (final Issue issue : issues) {
 			assertThat(issue.getSummary(), is(notNullValue()));
 			assertThat(issue.getDescription(), is(notNullValue()));
 			assertThat(issue.getStartDate(), is(notNullValue()));
@@ -61,11 +61,11 @@ public class GdataServiceTest extends BaseBtiTest {
 
 	@Test
 	public void getSpreadsheetKey() throws Exception {
-		String key = "0Ajq41fTDA49TdDVIUlRTeldUV2dVNFdBbTNONmtYZ3c";
-		URL url = new URL("http://spreadsheets.google.com/ccc?key=" + key
+		final String key = "0Ajq41fTDA49TdDVIUlRTeldUV2dVNFdBbTNONmtYZ3c";
+		final URL url = new URL("http://spreadsheets.google.com/ccc?key=" + key
 				+ "&hl=ja");
 
-		String actual = service.getSpreadsheetKey(url);
+		final String actual = service.getSpreadsheetKey(url);
 		assertThat(actual, is(key));
 	}
 

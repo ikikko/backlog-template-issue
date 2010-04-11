@@ -16,7 +16,7 @@ public enum Method {
 
 	private String name;
 
-	private Method(String name) {
+	private Method(final String name) {
 		this.name = name;
 	}
 

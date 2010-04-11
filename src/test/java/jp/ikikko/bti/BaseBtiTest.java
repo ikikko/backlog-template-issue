@@ -29,14 +29,14 @@ public abstract class BaseBtiTest {
 	}
 
 	protected static void loadBacklogProperties() throws Exception {
-		Properties properties = new Properties();
+		final Properties properties = new Properties();
 
 		// プロパティファイル（テンプレート）の読込
-		InputStream propertyFileTemplate = BacklogApiClientTest.class
+		final InputStream propertyFileTemplate = BacklogApiClientTest.class
 				.getResourceAsStream("template.backlogApiClient.properties");
 		properties.load(propertyFileTemplate);
 		// 存在するならば、プロパティファイル（ユーザ固有）の読込
-		InputStream propertyFile = BacklogApiClientTest.class
+		final InputStream propertyFile = BacklogApiClientTest.class
 				.getResourceAsStream("backlogApiClient.properties");
 		if (propertyFile != null) {
 			properties.load(propertyFile);
@@ -52,9 +52,9 @@ public abstract class BaseBtiTest {
 	}
 
 	protected static void loadGdataProperties() throws Exception {
-		Properties properties = new Properties();
+		final Properties properties = new Properties();
 
-		InputStream propertyFile = GdataServiceTest.class
+		final InputStream propertyFile = GdataServiceTest.class
 				.getResourceAsStream("gdataService.properties");
 		properties.load(propertyFile);
 

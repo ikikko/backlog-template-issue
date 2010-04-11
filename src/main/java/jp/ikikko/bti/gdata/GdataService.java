@@ -34,11 +34,11 @@ public class GdataService {
 
 	private static DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 
-	private SpreadsheetService service;
+	private final SpreadsheetService service;
 
 	public GdataService() {
-		String serviceName = StringUtils.join(new Object[] { SERVICE_COMPANY,
-				SERVICE_APPLICATION, SERVICE_VERSION }, "-");
+		final String serviceName = StringUtils.join(new Object[] {
+				SERVICE_COMPANY, SERVICE_APPLICATION, SERVICE_VERSION }, "-");
 
 		service = new SpreadsheetService(serviceName);
 	}
@@ -46,7 +46,7 @@ public class GdataService {
 	/**
 	 * ログインします。
 	 */
-	public void login(String username, String password)
+	public void login(final String username, final String password)
 			throws AuthenticationException {
 		service.setUserCredentials(username, password);
 	}
@@ -54,22 +54,22 @@ public class GdataService {
 	/**
 	 * テンプレートの課題情報を取得します。
 	 */
-	public Collection<Issue> getTemplateIssues(URL url,
-			BacklogDataRegistry backlogDataRegistry) throws ServiceException,
-			IOException {
+	public Collection<Issue> getTemplateIssues(final URL url,
+			final BacklogDataRegistry backlogDataRegistry)
+			throws ServiceException, IOException {
 
-		String key = getSpreadsheetKey(url);
-		URL entryUrl = new URL(
+		final String key = getSpreadsheetKey(url);
+		final URL entryUrl = new URL(
 				"http://spreadsheets.google.com/feeds/spreadsheets/" + key);
 
-		SpreadsheetEntry spreadsheet = service.getEntry(entryUrl,
+		final SpreadsheetEntry spreadsheet = service.getEntry(entryUrl,
 				SpreadsheetEntry.class);
-		WorksheetEntry worksheet = spreadsheet.getDefaultWorksheet();
-		ListFeed listFeed = service.getFeed(worksheet.getListFeedUrl(),
+		final WorksheetEntry worksheet = spreadsheet.getDefaultWorksheet();
+		final ListFeed listFeed = service.getFeed(worksheet.getListFeedUrl(),
 				ListFeed.class);
 
-		List<Issue> issues = new ArrayList<Issue>();
-		for (ListEntry list : listFeed.getEntries()) {
+		final List<Issue> issues = new ArrayList<Issue>();
+		for (final ListEntry list : listFeed.getEntries()) {
 			issues.add(createIssueFromSingleList(list, backlogDataRegistry));
 		}
 
@@ -79,12 +79,12 @@ public class GdataService {
 	/**
 	 * スプレッドシートの Key を取得します。
 	 */
-	String getSpreadsheetKey(URL url) {
-		Map<String, String> map = new HashMap<String, String>();
+	String getSpreadsheetKey(final URL url) {
+		final Map<String, String> map = new HashMap<String, String>();
 
-		for (String param : url.getQuery().split("&")) {
-			String key = param.split("=")[0];
-			String value = param.split("=")[1];
+		for (final String param : url.getQuery().split("&")) {
+			final String key = param.split("=")[0];
+			final String value = param.split("=")[1];
 			map.put(key, value);
 		}
 
@@ -94,10 +94,10 @@ public class GdataService {
 	/**
 	 * スプレッドシートの1行から、{@link Issue} を作成します。
 	 */
-	Issue createIssueFromSingleList(ListEntry list,
-			BacklogDataRegistry backlogDataRegistry) {
-		Issue issue = new Issue();
-		CustomElementCollection elements = list.getCustomElements();
+	Issue createIssueFromSingleList(final ListEntry list,
+			final BacklogDataRegistry backlogDataRegistry) {
+		final Issue issue = new Issue();
+		final CustomElementCollection elements = list.getCustomElements();
 
 		issue.setSummary(elements.getValue("件名"));
 		issue.setDescription(elements.getValue("詳細"));
@@ -105,13 +105,13 @@ public class GdataService {
 		if (elements.getValue("開始日") != null) {
 			try {
 				issue.setStartDate(format.parse(elements.getValue("開始日")));
-			} catch (ParseException e) {
+			} catch (final ParseException e) {
 			}
 		}
 		if (elements.getValue("期限日") != null) {
 			try {
 				issue.setDueDate(format.parse(elements.getValue("期限日")));
-			} catch (ParseException e) {
+			} catch (final ParseException e) {
 			}
 		}
 
@@ -135,7 +135,7 @@ public class GdataService {
 			issue.setPriority(Integer.valueOf(elements.getValue("優先度ID")));
 		}
 		if (elements.getValue("担当者ユーザ名") != null) {
-			User registeredUser = backlogDataRegistry
+			final User registeredUser = backlogDataRegistry
 					.getRegisteredUser(elements.getValue("担当者ユーザ名"));
 			if (registeredUser != null) {
 				issue.setAssignerUser(registeredUser);
