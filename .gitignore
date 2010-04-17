@@ -1,0 +1,7 @@
+
+/src/test/resources/jp/ikikko/bti/gdata/gdataService.properties
+/src/test/resources/jp/ikikko/bti/backlog/backlogApiClient.properties
+/target/
+/.settings/
+/.classpath
+/.project
