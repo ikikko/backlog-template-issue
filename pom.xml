@@ -4,7 +4,7 @@
   <artifactId>backlog-template-issue</artifactId>
   <version>1.1.1-SNAPSHOT</version>
   <scm>
-  	<connection>scm:svn:https://svn.sourceforge.jp/svnroot/ikikko/backlog-template-issue/trunk</connection>
+  	<connection>scm:git:git://git@github.com/ikikko/backlog-template-issue.git</connection>
   </scm>
   <build>
     <plugins>

@@ -1,1 +1,2 @@
-mvn release:prepare release:perform -Drelease.username=%1 -Drelease.password=%2
+ssh-add ~/.ssh/id_rsa
+mvn clean release:prepare release:perform
